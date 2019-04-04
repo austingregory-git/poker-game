@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link rel="stylesheet" href="../css/pokerStyle.css">
+	<div id="headerPane" class="headerPane">
+   
+		<div id="midHeaderPane" class="midHeaderPane"> Play Poker
+    
+		</div>
+  
+	</div>
+
+<style>
+canvas {
+	border: 1px solid  Maroon;
+	background-color: MediumSeaGreen;
+}
+</style>
+</head>
+<body onload="startGame()">
+<img id="deck" src="../images/deck2.jpg">
+<img id="twohearts" src="../images/twohearts.jpg">
+<script>
+
+var myPlayer;
+
+
+function startGame() {
+	myGameArea.start();
+	myPlayer = new player(80, 80, "blue", 200, 200, "Wafflmao", 1000);
+	myPlayer = new player(80, 80, "red", 200, 400, "Shaun", 1000);
+	myPlayer = new player(80, 80, "yellow", 200, 600, "Chris", 1000);
+	myPlayer = new player(80, 80, "green", 1700, 200, "Craig", 1000);
+	myPlayer = new player(80, 80, "purple", 1700, 400, "Twig", 1000);
+	myPlayer = new player(80, 80, "orange", 1700, 600, "Pika23", 1000);
+}
+
+var myGameArea = {
+	canvas : document.createElement("canvas"),
+	start : function() {
+		this.canvas.width = 1900;
+		this.canvas.height = 800;
+		this.context = this.canvas.getContext("2d");
+		var deckimg = document.getElementById("deck");
+		var twoheartsimg = document.getElementById("twohearts");
+		this.context.drawImage(deckimg, 700, 400);
+		this.context.drawImage(twoheartsimg, 800, 400);
+		this.context.drawImage(twoheartsimg, 900, 400);
+		this.context.drawImage(twoheartsimg, 1000, 400);
+		this.context.font = "30px Arial"
+		this.context.fillText("Current Pot: 0", 850, 700);
+		document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+	}
+}
+
+function player(width, height, color, x, y, username, chips) {
+	this.width = width;
+	this.height = height;
+	this.x = x;
+	this.y = y;
+	this.username = username;
+	this.chips = chips;
+	ctx = myGameArea.context;
+	ctx.font = "30px Arial";
+	ctx.fillStyle = "Black";
+	ctx.fillText(username, x, y-10);
+	ctx.fillText("Chips: " + chips, x, y+120);
+	ctx.fillStyle = color;
+	ctx.fillRect(this.x, this.y, this.width, this.height);
+}
+
+</script>
+
+</body>
+</html>
